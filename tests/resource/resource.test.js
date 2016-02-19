@@ -89,7 +89,16 @@ describe('Resource(basic)', function() {
         expect(exception).to.eql(new Error('resource needs a model'));
         done();
       }
+    });
 
+    it('should extend default options', function() {
+      rest.defaultOptions.resource = { pagination: false };
+
+      var resource = rest.resource({
+        model: test.models.Person
+      });
+
+      expect( resource.pagination ).to.be.equal( false );
     });
 
     it('should auto generate endpoints if none were provided', function() {

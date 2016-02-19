@@ -34,6 +34,22 @@ describe('Epilogue', function() {
     done();
   });
 
+  it('should extend .resource options if they are provided on initialize', function() {
+    var resourceOptions = { pagination: false };
+
+    epilogue.initialize({
+      app: {},
+      sequelize: new Sequelize('main', null, null, {
+        dialect: 'sqlite',
+        storage: ':memory:',
+        logging: (process.env.SEQ_LOG ? console.log : false)
+      }),
+      resource: resourceOptions
+    });
+
+    expect(epilogue.defaultOptions.resource).to.be.equal(resourceOptions);
+  });
+
   it('should allow the user to pass in a sequelize instance rather than prototype', function() {
     var db = new Sequelize('main', null, null, {
       dialect: 'sqlite',

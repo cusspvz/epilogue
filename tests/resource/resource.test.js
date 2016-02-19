@@ -78,7 +78,7 @@ describe('Resource(basic)', function() {
   // TESTS
   describe('construction', function() {
     it('should throw an exception if called with an invalid model', function(done) {
-      expect(rest.resource).to.throw('please specify a valid model');
+      expect(rest.resource.bind(rest)).to.throw('please specify a valid model');
       done();
     });
 
